@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const valueDisplay = document.getElementById('valueDisplay');
+    const valueDisplay = document.getElementById('editableValue'); // Changed to editableValue based on index.html
     const playButton = document.getElementById('playButton');
     const cooldownTimer = document.getElementById('cooldownTimer');
 
@@ -8,7 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let countdownInterval = null;
     let clickCount = 0; // Добавляем счетчик нажатий
 
-    // Функция для генерации случайного значения
+    // Make valueDisplay editable
+    valueDisplay.contentEditable = true; //
+    valueDisplay.spellcheck = false; // Disable spellcheck for better UX
+
+    // Function to generate a random value
     function generateRandomValue() {
         clickCount++; // Увеличиваем счетчик при каждом нажатии
 
@@ -54,12 +58,58 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        valueDisplay.innerHTML = '<span class="loading-dots"><span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></span>';
+        // When play button is clicked, disable manual editing
+        valueDisplay.contentEditable = false; //
+        valueDisplay.innerHTML = '<span class="loading-dots"><span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></span>'; //
 
         setTimeout(() => {
             const newValue = generateRandomValue();
             valueDisplay.textContent = `${newValue}X`;
+            valueDisplay.contentEditable = true; // Re-enable editing after value is set
             startCooldown();
         }, 1500); // 1.5 секунды для анимации загрузки
+    });
+
+    // Handle manual input:
+    // Ensure only numbers and 'X' are allowed and automatically append 'X' if missing
+    valueDisplay.addEventListener('input', () => { //
+        let text = valueDisplay.textContent.trim().toUpperCase(); //
+        // Remove all non-numeric characters except 'X'
+        text = text.replace(/[^0-9.]/g, ''); // Allow digits and a decimal point
+
+        // Ensure only one decimal point
+        const parts = text.split('.'); //
+        if (parts.length > 2) { //
+            text = parts[0] + '.' + parts.slice(1).join(''); //
+        }
+
+        // Add 'X' at the end if it's not there
+        if (!text.endsWith('X') && text !== '') { //
+            text += 'X'; //
+        }
+        
+        valueDisplay.textContent = text; //
+
+        // Keep cursor at the end (optional, but improves UX)
+        const range = document.createRange(); //
+        const sel = window.getSelection(); //
+        range.selectNodeContents(valueDisplay); //
+        range.collapse(false); //
+        sel.removeAllRanges(); //
+        sel.addRange(range); //
+    });
+
+    // Add a check to reset the initial "???" when user focuses
+    valueDisplay.addEventListener('focus', () => { //
+        if (valueDisplay.textContent === '???') { //
+            valueDisplay.textContent = ''; //
+        }
+    });
+
+    // Restore "???" if empty after focus out
+    valueDisplay.addEventListener('blur', () => { //
+        if (valueDisplay.textContent.trim() === '') { //
+            valueDisplay.textContent = '???'; //
+        }
     });
 });
