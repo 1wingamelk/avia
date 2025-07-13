@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.getElementById('playButton');
     const cooldownTimer = document.getElementById('cooldownTimer');
 
-    const COOLDOWN_SECONDS = 10;
+    const COOLDOWN_SECONDS = 15;
     let isCooldown = false;
     let countdownInterval = null;
     let clickCount = 0; // Добавляем счетчик нажатий
@@ -13,12 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         clickCount++; // Увеличиваем счетчик при каждом нажатии
 
         if (clickCount % 5 === 0) {
-            // Каждое 5-е нажатие: значение от 8 до 10
-            const randomNum = Math.random() * (100 - 80) + 80; // От 80 до 100 для toFixed(1)
+            // Каждое 5-е нажатие: значение от 12 до 50
+            // Генерируем число от 120 до 500, затем делим на 10
+            const randomNum = Math.random() * (500 - 120) + 120; 
             return (randomNum / 10).toFixed(1);
         } else {
-            // Чаще всего: значение от 0 до 2
-            const randomNum = Math.random() * 20; // От 0 до 20 для toFixed(1)
+            // Чаще всего: значение от 1 до 4 (этот диапазон остается прежним)
+            const randomNum = Math.random() * (40 - 10) + 10;
             return (randomNum / 10).toFixed(1);
         }
     }
