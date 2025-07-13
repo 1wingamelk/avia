@@ -18,6 +18,14 @@ body {
     padding: 20px;
 }
 
+.round-indicator { /* Новые стили для надписи NEXT ROUND */
+    font-size: 2em;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px; /* Отступ от круга */
+}
+
 .circle-wrapper {
     position: relative;
     width: 300px; /* Размер круга */
