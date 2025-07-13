@@ -12,14 +12,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function generateRandomValue() {
         clickCount++; // Увеличиваем счетчик при каждом нажатии
 
-        if (clickCount % 5 === 0) {
-            // Каждое 5-е нажатие: значение от 12 до 50
-            // Генерируем число от 120 до 500, затем делим на 10
-            const randomNum = Math.random() * (500 - 120) + 120; 
+        if (clickCount % 6 === 0) {
+            // Каждое 6-е нажатие: значение от 10 до 50
+            // Генерируем число от 100 до 500, затем делим на 10
+            const randomNum = Math.random() * (500 - 100) + 100;
+            return (randomNum / 10).toFixed(1);
+        } else if (clickCount % 3 === 0) {
+            // Каждое 3-е нажатие (если не 6-е): значение от 2 до 10
+            // Генерируем число от 20 до 100, затем делим на 10
+            const randomNum = Math.random() * (100 - 20) + 20;
             return (randomNum / 10).toFixed(1);
         } else {
-            // Чаще всего: значение от 1 до 4 (этот диапазон остается прежним)
-            const randomNum = Math.random() * (40 - 10) + 10;
+            // Чаще всего (не 3-е и не 6-е нажатие): значение от 0 до 2
+            // Генерируем число от 0 до 20, затем делим на 10
+            const randomNum = Math.random() * (20 - 0) + 0;
             return (randomNum / 10).toFixed(1);
         }
     }
