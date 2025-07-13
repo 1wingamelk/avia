@@ -1,19 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const valueDisplay = document.getElementById('valueDisplay');
+    // Переименовали переменную с 'valueDisplay' на 'resultOutputElement'
+    const resultOutputElement = document.getElementById('valueDisplay'); // Получаем элемент по его ID
     const playButton = document.getElementById('playButton');
     const cooldownTimer = document.getElementById('cooldownTimer');
 
     const COOLDOWN_SECONDS = 5;
     let isCooldown = false;
     let countdownInterval = null;
-    // clickCount is no longer needed as the value is fixed
-    // let clickCount = 0; // Добавляем счетчик нажатий
+    // clickCount больше не нужен, так как значение фиксировано
+    // let clickCount = 0;
 
-    // Modified function to always return "15.8"
-    function generateRandomValue() {
-        // We no longer need the clickCount logic as the value is fixed.
-        // clickCount++;
-        return "15.8"; // Always return 15.8
+    // Функция теперь всегда возвращает "15.8"
+    function generateFixedValue() {
+        return "15.8";
     }
 
     function startCooldown() {
@@ -40,11 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        valueDisplay.innerHTML = '<span class="loading-dots"><span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></span>';
+        // Используем новую переменную 'resultOutputElement'
+        resultOutputElement.innerHTML = '<span class="loading-dots"><span class="loading-dot">.</span><span class="loading-dot">.</span><span class="loading-dot">.</span></span>';
 
         setTimeout(() => {
-            const newValue = generateRandomValue();
-            valueDisplay.textContent = `${newValue}X`; // Append "X" here
+            const fixedValue = generateFixedValue();
+            // Используем новую переменную 'resultOutputElement'
+            resultOutputElement.textContent = `${fixedValue}X`;
             startCooldown();
         }, 1500); // 1.5 секунды для анимации загрузки
     });
