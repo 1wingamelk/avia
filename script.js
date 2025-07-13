@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.getElementById('playButton');
     const cooldownTimer = document.getElementById('cooldownTimer');
 
-    const COOLDOWN_SECONDS = 15;
+    const COOLDOWN_SECONDS = 5;
     let isCooldown = false;
     let countdownInterval = null;
     let clickCount = 0; // Добавляем счетчик нажатий
