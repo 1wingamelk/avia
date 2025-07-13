@@ -1,0 +1,128 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #171940; /* Цвет фона */
+    font-family: 'Orbitron', sans-serif; /* Применяем шрифт Orbitron */
+    color: #ffffff; /* Белый цвет текста по умолчанию */
+    overflow: hidden; /* Скрываем прокрутку, если контент выходит за пределы */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Расстояние между элементами */
+    padding: 20px;
+}
+
+.circle-wrapper {
+    position: relative;
+    width: 300px; /* Размер круга */
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rotating-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #8A2BE2, #9932CC, #DA70D6); /* Градиент фиолетового цвета */
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.7); /* Свечение */
+    animation: rotate 10s linear infinite; /* Анимация вращения */
+}
+
+.plane-image {
+    position: relative; /* Чтобы самолет был поверх вращающегося круга */
+    width: 150px; /* Уменьшаем размер самолета, чтобы он помещался в круге */
+    height: 150px;
+    object-fit: contain; /* Сохраняем пропорции изображения */
+    z-index: 1; /* Убедимся, что самолет находится над кругом */
+}
+
+.value-display {
+    font-size: 3em; /* Большой размер шрифта для значения */
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); /* Легкое свечение для текста */
+}
+
+.loading-dots {
+    display: flex;
+    gap: 5px;
+    font-size: 3em;
+}
+
+.loading-dot {
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+.play-button {
+    padding: 15px 40px;
+    font-size: 1.8em;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #8A2BE2, #9932CC, #DA70D6); /* Градиент как у круга */
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.9); /* Свечение кнопки */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.play-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 35px rgba(138, 43, 226, 1);
+}
+
+.play-button:active {
+    transform: translateY(0);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+}
+
+.play-button:disabled {
+    background: linear-gradient(45deg, #5c2096, #6b2591, #944e92); /* Более тусклый градиент для disabled */
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.cooldown-timer {
+    margin-top: 10px;
+    font-size: 1.2em;
+    color: rgba(255, 255, 255, 0.7);
+    height: 1.2em; /* Чтобы сохранить место, даже когда нет текста */
+}
+
+/* Анимации */
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.2;
+    }
+    50% {
+        opacity: 1;
+    }
+}
